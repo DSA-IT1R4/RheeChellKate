@@ -41,12 +41,26 @@ def validate_fields(name, phone):
         )
         return False
 
-    allowed_chars = "0123456789+- "
+    phone = phone.strip()
 
-    if not all(char in allowed_chars for char in phone):
+    if not phone.isdigit():
         messagebox.showwarning(
             "Invalid Phone Number",
-            "Phone number can only contain numbers, spaces, + and -"
+            "Phone number must contain numbers only."
+        )
+        return False
+
+    if len(phone) != 11:
+        messagebox.showwarning(
+            "Invalid Phone Number",
+            "Phone number must be exactly 11 digits."
+        )
+        return False
+
+    if not phone.startswith("09"):
+        messagebox.showwarning(
+            "Invalid Phone Number",
+            "Philippine mobile numbers must start with 09."
         )
         return False
 
